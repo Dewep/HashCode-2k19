@@ -1,0 +1,15 @@
+{
+  "name": "hashcode-2k19",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dewep/HashCode-2k19.git"
+  },
+  "license": "GNU GPLv3",
+  "dependencies": {
+    "botcluster": "git+https://github.com/Dewep/BotCluster.git"
+  }
+}
