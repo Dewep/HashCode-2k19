@@ -1,32 +1,15 @@
 const fs = require('fs')
 const content = fs.readFileSync(process.argv[2]).toString().split('\n')
 
-const firstLine = content[0].split(' ').map(n => +n)
+const number = +content[0]
+const photos = []
 
-const res = {
-  nbRows: firstLine[0],
-  nbCols: firstLine[1],
-  nbVeh: firstLine[2],
-  nbRides: firstLine[3],
-  bonus: firstLine[4],
-  nbSteps: firstLine[5],
-  rides: []
+for (let index = 0; index < number; index++) {
+  const parts = content[index + 1].split(' ')
+  photos.push({
+    h: parts[0] === 'H' ? 1 : 0,
+    t: parts.slice(2)
+  })
 }
 
-let lineIndex = 1
-
-for (let index = 0; index < res.nbRides; index++) {
-  let line = content[lineIndex++].split(' ').map(n => +n)
-  const ride = {
-    sR: line[0],
-    sC: line[1],
-    fR: line[2],
-    fC: line[3],
-    eS: line[4],
-    lT: line[5]
-  }
-  ride.d = Math.abs(ride.sR - ride.fR) + Math.abs(ride.sC - ride.fC)
-  res.rides.push(ride)
-}
-
-fs.writeFileSync(process.argv[3], JSON.stringify(res))
+fs.writeFileSync(process.argv[3], JSON.stringify(photos))
