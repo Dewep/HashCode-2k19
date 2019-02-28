@@ -1,0 +1,40 @@
+module.exports = {
+  initialState: () => ({
+    work: 0,
+    best: {
+      sol: null,
+      score: null
+    }
+  }),
+
+  configNode: {
+  },
+
+  nodeFilesModule: ['compute.js', 'b.json'],
+
+  workSize: 5000,
+
+  next (state) {
+    if (state.work > 5000) {
+      return null
+    }
+    state.work++
+    return new Array(1)
+  },
+
+  analyze (toCompute, results, state) {
+    for (let i = 0; i < toCompute.length && i < results.length; i++) {
+      if (!state.best.sol || state.best.score < results[i].score) {
+        state.best.sol = results[i].sol
+        state.best.score = results[i].score
+      }
+    }
+  },
+
+  result (state) {
+    if (!state.best.sol) {
+      return 'N/A'
+    }
+    return `Score: ${state.best.score}\n` + JSON.stringify(state.best.sol)
+  }
+}
